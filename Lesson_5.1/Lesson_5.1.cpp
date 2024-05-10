@@ -4,10 +4,11 @@
 #include <random>
 #include <fstream>
 #include <Windows.h>
-//#include "MyRectangle.h"
+#include "MyRectangle.h"
 //#include "MySquare.h"
 //#include "MyCube.h"
 #include "MyTriangle.h"
+#include "MyCircle.h"
 
 using namespace std;
 
@@ -74,19 +75,19 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    int numberOfFigures = GetNumberOfFigures();
-
-    numberOfFigures = 4;
+    //int numberOfFigures = GetNumberOfFigures();
+    int numberOfFigures = 5;
 
     Figure** figures = new Figure * [numberOfFigures];
 
-    int max = (int)TypeFigure::MaxValue;
-    int min = (int)TypeFigure::MinValue;
-
     figures[0] = new MyRectangle("Прямоугольник №1" , 37, 27);
-    figures[1] = new MySquare("Квадрат №2", 15);
-    figures[2] = new MyCube("Куб №3", 6);
-    figures[3] = new MyTriangle("Треугольник №4", 20, 15, 8);
+    //figures[1] = new MySquare("Квадрат №2", 15);
+    //figures[2] = new MyCube("Куб №3", 6);
+    //figures[3] = new MyTriangle("Треугольник №4", 20, 15, 8);
+    //figures[4] = new MyCircle("Круг №4", 15);
+
+    //int max = (int)TypeFigure::MaxValue;
+    //int min = (int)TypeFigure::MinValue;
 
     /*for (int index = 0; index < numberOfFigures; index++)
     {
