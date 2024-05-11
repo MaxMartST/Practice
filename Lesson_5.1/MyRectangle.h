@@ -6,18 +6,13 @@ class MyRectangle : public Figure
 protected:
     double size1, size2;
 public:
-    MyRectangle(TypeFigure typeFigureg, string nameFigure, double size) : Figure(typeFigureg, nameFigure)
-    {
-        SetSize(size, size);
-    }
+    MyRectangle(TypeFigure typeFigureg, string nameFigure, double size);
+    MyRectangle(string nameFigure, double size1, double size2);
 
-    MyRectangle(string nameFigure, double size1, double size2) : Figure(TypeFigure::Rectangle, nameFigure)
-    {
-        SetSize(size1, size2);
-    }
+    friend istream& operator>>(std::istream&, MyRectangle&);
 private:
-    double Perimeter() const override;
-    double Space()  const override;
+    double Perimeter();
+    double Space();
     void SetSize(double size1, double size2);
 };
 

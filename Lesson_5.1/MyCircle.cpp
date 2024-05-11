@@ -1,11 +1,21 @@
 #include "MyCircle.h"
 
-double MyCircle::Perimeter() const
+MyCircle::MyCircle(TypeFigure typeFigure, string nameFigure, double radiusSize) : Figure(typeFigure, nameFigure)
+{
+    SetSize(radiusSize);
+}
+
+MyCircle::MyCircle(string nameFigure, double radiusSize) : Figure(TypeFigure::Circle, nameFigure)
+{
+    SetSize(radiusSize);
+}
+
+double MyCircle::Perimeter()
 {
     return 2 * PI * radiusSize;
 }
 
-double MyCircle::Space() const
+double MyCircle::Space()
 {
     return PI * radiusSize * radiusSize;
 }
@@ -17,3 +27,8 @@ void MyCircle::SetSize(double radiusSize)
 
     this->radiusSize = radiusSize;
 }
+
+istream& operator>>(istream& is, MyCircle& _circle) {
+    cout << "¬ведите им€ фигуры и значение радиуса: ";
+    return is >> _circle.name >> _circle.radiusSize;
+};

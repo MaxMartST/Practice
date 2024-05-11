@@ -7,18 +7,13 @@ protected:
     double const PI = 3.14;
     double radiusSize;
 public:
-    MyCircle(TypeFigure typeFigure, string nameFigure, double radiusSize) : Figure(typeFigure, nameFigure)
-    {
-        SetSize(radiusSize);
-    }
+    MyCircle(TypeFigure typeFigure, string nameFigure, double radiusSize);
+    MyCircle(string nameFigure, double radiusSize);
 
-    MyCircle(string nameFigure, double radiusSize) : Figure(TypeFigure::Circle, nameFigure)
-    {
-        SetSize(radiusSize);
-    }
+    double Perimeter() override;
+    double Space() override;
 
-    double Perimeter() const override;
-    double Space() const override;
+    friend istream& operator>>(istream&, MyCircle&);
 private:
     void SetSize(double radiusSize);
 };

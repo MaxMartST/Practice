@@ -1,19 +1,21 @@
 #include "MyCube.h"
+MyCube::MyCube(string nameFigure, double sizeSide) : MySquare(TypeFigure::Cube, nameFigure, sizeSide) {}
+
 double MyCube::Volume() const
 {
     return this->size1 * this->size1 * this->size1;
 }
-double MyCube::Perimeter() const
+double MyCube::Perimeter()
 {
     return 12 * this->size1;
 }
 
-double MyCube::Space() const
+double MyCube::Space()
 {
     return 6 * pow(this->size1, 2);
 }
 
-string MyCube::GetInformationStringFigure() const
+string MyCube::GetInformationStringFigure()
 {
     return "\tТип фигуры: " + type
         + "\n\tИмя фигуры: " + name

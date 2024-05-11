@@ -4,11 +4,13 @@
 #include <random>
 #include <fstream>
 #include <Windows.h>
+#include "Figure.h"
 #include "MyRectangle.h"
-//#include "MySquare.h"
-//#include "MyCube.h"
+#include "MySquare.h"
+#include "MyCube.h"
 #include "MyTriangle.h"
 #include "MyCircle.h"
+#include "MyBall.h"
 
 using namespace std;
 
@@ -58,16 +60,13 @@ static int GetNumberOfFigures()
     return numberOfFigures;
 }
 
-static int GetRandomSize()
+static int GetRandom(int start = 10, int end = 1000)
 {
-    int size = 0;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(start, end);
 
-    do
-    {
-        size = rand() % (1000 - 1) + 1;
-    } while (size <= 0);
-
-    return size;
+    return dist(gen);
 }
 
 int main()
@@ -75,25 +74,15 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    //int numberOfFigures = GetNumberOfFigures();
-    int numberOfFigures = 5;
-
+    int numberOfFigures = GetNumberOfFigures();
     Figure** figures = new Figure * [numberOfFigures];
 
-    figures[0] = new MyRectangle("Прямоугольник №1" , 37, 27);
-    //figures[1] = new MySquare("Квадрат №2", 15);
-    //figures[2] = new MyCube("Куб №3", 6);
-    //figures[3] = new MyTriangle("Треугольник №4", 20, 15, 8);
-    //figures[4] = new MyCircle("Круг №4", 15);
+    int max = (int)TypeFigure::MaxValue;
+    int min = (int)TypeFigure::MinValue;
 
-    //int max = (int)TypeFigure::MaxValue;
-    //int min = (int)TypeFigure::MinValue;
-
-    /*for (int index = 0; index < numberOfFigures; index++)
+    for (int index = 0; index < numberOfFigures; index++)
     {
-        int sizeSide, sizeSide1, sizeSide2;
-        int randomTypeFigure = rand() % (max - min + 1) + min;
-
+        int randomTypeFigure = GetRandom(min, max);
         bool isCorrectFigure = false;
 
         while (!isCorrectFigure)
@@ -103,31 +92,22 @@ int main()
                 switch (randomTypeFigure)
                 {
                 case (int)TypeFigure::Square:
-                    sizeSide = GetRandomSize();
-                    figures[index] = new MySquare("Квадрат №" + to_string(index + 1), sizeSide);
+                    figures[index] = new MySquare("Квадрат №" + to_string(index + 1), GetRandom());
                     break;
                 case (int)TypeFigure::Rectangle:
-                    sizeSide = GetRandomSize();
-                    sizeSide1 = GetRandomSize();
-                    figures[index] = new MyRectangle("Прямоугольник №" + to_string(index + 1), sizeSide, sizeSide1);
+                    figures[index] = new MyRectangle("Прямоугольник №" + to_string(index + 1), GetRandom(), GetRandom());
                     break;
                 case (int)TypeFigure::Triangle:
-                    sizeSide = GetRandomSize();
-                    sizeSide1 = GetRandomSize();
-                    sizeSide2 = GetRandomSize();
-                    figures[index] = new MyTriangle("Треугольник №" + to_string(index + 1), sizeSide, sizeSide1, sizeSide2);
+                    figures[index] = new MyTriangle("Треугольник №" + to_string(index + 1), GetRandom(), GetRandom(), GetRandom());
                     break;
                 case (int)TypeFigure::Circle:
-                    sizeSide = GetRandomSize();
-                    figures[index] = new MyCircle("Круг №" + to_string(index + 1), sizeSide);
+                    figures[index] = new MyCircle("Круг №" + to_string(index + 1), GetRandom());
                     break;
                 case (int)TypeFigure::Cube:
-                    sizeSide = GetRandomSize();
-                    figures[index] = new MyCube("Куб №" + to_string(index + 1), sizeSide);
+                    figures[index] = new MyCube("Куб №" + to_string(index + 1), GetRandom());
                     break;
                 case (int)TypeFigure::Ball:
-                    sizeSide = GetRandomSize();
-                    figures[index] = new MyBall("Шар №" + to_string(index + 1), sizeSide);
+                    figures[index] = new MyBall("Шар №" + to_string(index + 1), GetRandom());
                     break;
                 default:
                     throw exception("Тип фигуры не найден");
@@ -140,14 +120,25 @@ int main()
                 cout << "Ошибка: " << ex.what() << endl;
             }
         } 
-    }*/
+    }
 
     string sResultFileName = "figures.txt";
     ofstream out(sResultFileName);
+    double maxSpace = 0.00;
+    int indexFigure = 0;
 
     out << "Фигуры :" << endl;
     for (int i = 0; i < numberOfFigures; i++) {
         out << figures[i]->GetInformationStringFigure() << endl;
+
+        if (maxSpace < figures[i]->Space())
+        {
+            maxSpace = figures[i]->Space();
+            indexFigure = i;
+        }
     };
-    out << endl << endl;
+    
+    out << "Фигура с максимальной площадью: \n" << figures[indexFigure]->GetInformationStringFigure() << endl;
+
+    out.close();
 }

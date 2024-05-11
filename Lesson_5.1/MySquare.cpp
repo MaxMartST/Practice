@@ -1,19 +1,19 @@
 #include "MySquare.h"
 
-double MySquare::Perimeter() const
+MySquare::MySquare(TypeFigure typeFigure, string nameFigure, double sizeSide) : MyRectangle(typeFigure, nameFigure, sizeSide) {}
+MySquare::MySquare(string nameFigure, double sizeSide) : MyRectangle(TypeFigure::Square, nameFigure, sizeSide) {}
+
+double MySquare::Perimeter()
 {
     return 2 * (this->size1 + this->size2);
 }
 
-double MySquare::Space() const
+double MySquare::Space()
 {
     return this->size1 * this->size2;
 }
 
-string MySquare::GetInformationStringFigure() const
-{
-    return "Тип фигуры: " + type
-        + "\nИмя фигуры: " + name
-        + "\nПлощадь: " + to_string(Space())
-        + "\nПериметр: " + to_string(Perimeter());
-}
+istream& operator>>(istream& is, MySquare& _square) {
+	cout << "Введите имя фигуры и значение стороны:";
+	return is >> _square.name >> _square.size1;
+};

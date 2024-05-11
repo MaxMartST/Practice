@@ -1,7 +1,7 @@
 #pragma once
 enum class TypeFigure
 {
-    Square,
+    Square = 1,
     Rectangle,
     Triangle,
     Circle,

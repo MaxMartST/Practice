@@ -4,12 +4,12 @@
 class MyCube : public MySquare
 {
 public:
-    MyCube(string nameFigure, double sizeSide) : MySquare(TypeFigure::Cube, nameFigure, sizeSide) {}
+    MyCube(string nameFigure, double sizeSide);
 
     double Volume() const;
 
-    double Perimeter() const override;
-    double Space() const override;
-    string GetInformationStringFigure() const override;
+    double Perimeter() override;
+    double Space() override;
+    string GetInformationStringFigure() override;
 };
 

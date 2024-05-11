@@ -4,9 +4,11 @@
 class MySquare : public MyRectangle
 {
 public:
-    MySquare(TypeFigure typeFigure, string nameFigure, double sizeSide) : MyRectangle(typeFigure, nameFigure, sizeSide) {}
-    MySquare(string nameFigure, double sizeSide) : MyRectangle(TypeFigure::Square, nameFigure, sizeSide) {}
-    double Perimeter() const override;
-    double Space() const override;
-    string GetInformationStringFigure() const override;
+    MySquare(TypeFigure typeFigure, string nameFigure, double sizeSide);
+    MySquare(string nameFigure, double sizeSide);
+
+    double Perimeter() override;
+    double Space() override;
+
+    friend istream& operator>>(std::istream&, MySquare&);
 };

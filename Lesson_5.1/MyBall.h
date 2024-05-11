@@ -6,9 +6,9 @@ class MyBall : public MyCircle
 public:
     MyBall(string nameFigure, double radiusSize) : MyCircle(TypeFigure::Ball, nameFigure, radiusSize) {}
 
-    string GetInformationStringFigure() const override;
-    double Space() const override;
+    string GetInformationStringFigure() override;
+    double Space() override;
 
-    double Volume() const;
+    double Volume();
 };
 
