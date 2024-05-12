@@ -19,17 +19,15 @@ int main()
 
 int Pyramid(int bols)
 {
-    if (bols <= 0) return 0;
+    if (bols <= 0)
+        return 0;
 
-    int usingBols = 1;
-    int level = usingBols;
+    int level = 0;
 
-    if (bols == 1) return level;
-
-    while ((bols - usingBols) > usingBols)
+    while (bols > level)
     {
-        usingBols = usingBols + level;
         level++;
+        bols -= level;
     }
 
     return level;
